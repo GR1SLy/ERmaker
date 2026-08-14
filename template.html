@@ -91,9 +91,10 @@
     <!-- ШАБЛОН  -->
     <div class="page">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5x;">
-            <h2 style="margin: 0;">Экспедиторская расписка № ________ от «__» ____ 202_ г.</h2>
+            <h2 style="margin: 0;">Экспедиторская расписка № {data[number]} от «{data[document][day]}» {data[document][month]}
+                {data[document][year]} г.</h2>
             <!-- IMG LOGO -->
-            <img src="images/logo.png" style="width: 100px; height: auto" alt="logo">
+            <img src="../images/logo.png" style="width: 100px; height: auto" alt="logo">
         </div>
 
         <!-- Стороны: Экспедитор и Клиент -->
@@ -103,14 +104,14 @@
                 <div><b>Организация:</b> {data[expeditor][name]}</div>
                 <div>{data[expeditor][inn/kpp]}</div>
                 <div><b>Юр. Адрес:</b> {data[expeditor][address]}</div>
-                <div><b>Контактное лицо (тел):</b> ________________________</div>
+                <div><b>Контактное лицо (тел):</b> {data[expeditor][phone]}</div>
             </div>
             <div class="flex-col">
                 <div class="bold text-center" style="border-bottom: 1px solid #000; margin-bottom: 1px; padding-bottom: 1px;">ЗАКАЗЧИК (КЛИЕНТ)</div>
                 <div><b>Организация:</b> {data[client][name]}</div>
                 <div>{data[client][inn/kpp]}</div>
                 <div><b>Юр. Адрес:</b> {data[client][address]}</div>
-                <div><b>Контактное лицо (тел):</b> ________________________</div>
+                <div><b>Контактное лицо (тел):</b> {data[client][phone]}</div>
             </div>
         </div>
 
@@ -122,7 +123,7 @@
                 <div>{data[shipper][inn/kpp]}</div>
                 <div><b>Адрес:</b> {data[shipper][address]}</div>
                 <div><b>Время прибытия:</b> {data[shipper][date]}</div>
-                <div><b>Контактное лицо (тел):</b> ________________________</div>
+                <div><b>Контактное лицо (тел):</b> {data[shipper][phone]}</div>
             </div>
             <div class="flex-col">
                 <div class="bold text-center" style="border-bottom: 1px solid #000; margin-bottom: 1px; padding-bottom: 1px;">ГРУЗОПОЛУЧАТЕЛЬ (ВЫГРУЗКА)</div>
@@ -130,7 +131,7 @@
                 <div>{data[consignee][inn/kpp]}</div>
                 <div><b>Адрес:</b> {data[consignee][address]}</div>
                 <div><b>Время прибытия:</b> {data[consignee][date]}</div>
-                <div><b>Контактное лицо (тел):</b> ________________________</div>
+                <div><b>Контактное лицо (тел):</b> {data[consignee][phone]}</div>
             </div>
         </div>
 

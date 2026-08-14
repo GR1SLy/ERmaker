@@ -34,8 +34,12 @@ class PdfParser:
             for i, row in enumerate(self.all_rows):
                 print(i, ":", row)
 
-    def parse(self, debug) -> dict:
-        self._extract(debug)
+    def parse(self, debug) -> dict | None:
+        try:
+            self._extract(debug)
+        except Exception as e:
+            print(e)
+            return None
 
         first_client_expeditor = False
         for i, row in enumerate(self.all_rows):

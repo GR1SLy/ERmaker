@@ -1,5 +1,7 @@
 import re
 
+from lib.num_counter import NumCounter
+
 
 class HTMLGenerator:
     def __init__(self, data: dict, html_path: str):
@@ -9,6 +11,8 @@ class HTMLGenerator:
 
     def save(self, filename):
         """Обрабатывает шаблон и сохраняет результат в HTML-файл."""
+        self.data["number"] = NumCounter.read()
+        NumCounter.increase()
         html = self.template
         html = self._process_loop(html)
         html = self._replace_placeholders(html)
