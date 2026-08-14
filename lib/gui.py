@@ -7,6 +7,21 @@ from lib.pdf_maker import PDFMaker
 from lib.pdf_parser import PdfParser
 from tkcalendar import DateEntry
 
+month_names = {
+    1: 'января',
+    2: 'февраля',
+    3: 'марта',
+    4: 'апреля',
+    5: 'мая',
+    6: 'июня',
+    7: 'июля',
+    8: 'августа',
+    9: 'сентября',
+    10: 'октября',
+    11: 'ноября',
+    12: 'декабря'
+}
+
 class App:
     def __init__(self, root):
         self.parsed_data = None
@@ -101,7 +116,7 @@ class App:
     def save(self, path):
         selected_date = self.date_entry.get_date()
         self.parsed_data["document"]["day"] = selected_date.day
-        self.parsed_data["document"]["month"] = selected_date.month
+        self.parsed_data["document"]["month"] = month_names[int(selected_date.month)]
         self.parsed_data["document"]["year"] = selected_date.year
         self.parsed_data["client"]["phone"] = self.client_phone.get() if self.client_phone.get() != "" else "________________________"
         self.parsed_data["expeditor"]["phone"] = self.expeditor_phone.get() if self.expeditor_phone.get() != "" else "________________________"
