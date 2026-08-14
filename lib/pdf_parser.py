@@ -74,32 +74,34 @@ class PdfParser:
 
             #============================= Особые условия =============================
             if row[0] == 'Особые условия\nперевозки':
-                self.data["conditions"] = row[1]
+                self.data["conditions"] = row[1].replace('\n', '<br>')
 
 
             #============================= Грузы =============================
             if row[0] == 'Грузы':
-                self.data["cargo"]["total_items"] = self.all_rows[i + 1][1]
+                self.data["cargo"]["total_places"] = self.all_rows[i + 1][1]
                 self.data["cargo"]["total_weight"] = self.all_rows[i + 1][3]
                 self.data["cargo"]["total_price"] = str(self.all_rows[i + 1][5]).replace('\n', ' ')
 
                 cargo_row = i + 3
+                count = 0
                 while self.all_rows[cargo_row][0].isdigit():
                     item = {
                         "id": self.all_rows[cargo_row][0],
                         "name": self.all_rows[cargo_row][1],
                         "places": self.all_rows[cargo_row][2],
-                        "weight": self.all_rows[cargo_row][3].split('\n'),
+                        "weight": self.all_rows[cargo_row][3].replace('\n', '<br>'),
                         "volume": self.all_rows[cargo_row][4],
-                        "features": self.all_rows[cargo_row][-1].replace('\n', ' ') if self.all_rows[cargo_row][-1] else "",
+                        "features": self.all_rows[cargo_row][-1].replace('\n', '<br>') if self.all_rows[cargo_row][-1] else "",
                     }
                     self.data["cargo"]["items"].append(item)
                     cargo_row += 1
-
+                    count += 1
+                self.data["cargo"]["total_items"] = count
 
             #============================= Дополнительно =============================
             if row[0] == 'Дополнительно':
-                self.data["additional"] = self.all_rows[i + 1]
+                self.data["additional"] = str(self.all_rows[i + 1][0]).replace('\n', '<br>')
 
 
         return self.data

@@ -1,5 +1,7 @@
 1.html
 2.html
+stile.html
 /venv
 .idea
-/__pycache__
+/__pycache__/
+/lib/__pycache__/
