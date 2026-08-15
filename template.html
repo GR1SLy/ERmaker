@@ -89,12 +89,13 @@
 
     <!-- ШАБЛОН  -->
     <div class="page">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5x;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0x;">
             <h3 style="margin: 0;">Экспедиторская расписка № {data[number]} от «{data[document][day]}» {data[document][month]}
                 {data[document][year]}г.</h3>
             <!-- IMG LOGO -->
             <img src="../images/logo.png" style="width: 100px; height: auto" alt="logo">
         </div>
+        <div style="margin-bottom: -10px; margin-top: -20px"><h4>Договор транспортной экспедиции: {data[document][name]}</h4></div>
 
         <!-- Стороны: Экспедитор и Клиент -->
         <div class="flex-row" style="margin-bottom: 1px;">
@@ -141,11 +142,7 @@
                     <th>№</th>
                     <th>Груз</th>
                     <th>Кол-во мест</th>
-                    <th>
-                        <div>Вес брутто, кг</div>
-                        <div>нетто. кг</div>
-                        <div>тара, кг</div>
-                    </th>
+                    <th>Вес брутто / нетто / тара, кг</th>
                     <th>Вид упаковки</th>
                     <th>Объем, м³</th>
                     <th>Особенности</th>

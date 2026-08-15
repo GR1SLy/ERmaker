@@ -56,7 +56,7 @@ class PdfParser:
                 self.data["expeditor"]["address"] = str(self.all_rows[i + 2][1]).replace('\n', ' ')
             elif row[0] == 'Клиент' and not first_client_expeditor:
                 first_client_expeditor = True
-                self.data["document"]["name"] = self.all_rows[i + 2][0]
+                self.data["document"]["name"] = (self.all_rows[i + 2][0]).split(':')[1]
 
 
             #============================= Грузополучатель/Грузоотправитель =============================
@@ -89,18 +89,19 @@ class PdfParser:
 
                 cargo_row = i + 3
                 count = 0
-                while self.all_rows[cargo_row][0].isdigit():
-                    item = {
-                        "id": self.all_rows[cargo_row][0],
-                        "name": self.all_rows[cargo_row][1],
-                        "places": self.all_rows[cargo_row][2],
-                        "weight": self.all_rows[cargo_row][3].replace('\n', '<br>'),
-                        "volume": self.all_rows[cargo_row][4],
-                        "features": self.all_rows[cargo_row][-1].replace('\n', '<br>') if self.all_rows[cargo_row][-1] else "",
-                    }
-                    self.data["cargo"]["items"].append(item)
+                while self.all_rows[cargo_row] != self.all_rows[-3]:
+                    if self.all_rows[cargo_row][0].isdigit():
+                        item = {
+                            "id": self.all_rows[cargo_row][0],
+                            "name": self.all_rows[cargo_row][1],
+                            "places": self.all_rows[cargo_row][2],
+                            "weight": self.all_rows[cargo_row][3].replace('\n', ' / '),
+                            "volume": self.all_rows[cargo_row][4],
+                            "features": self.all_rows[cargo_row][-1].replace('\n', '<br>') if self.all_rows[cargo_row][-1] else "",
+                        }
+                        self.data["cargo"]["items"].append(item)
+                        count += 1
                     cargo_row += 1
-                    count += 1
                 self.data["cargo"]["total_items"] = count
 
             #============================= Дополнительно =============================
